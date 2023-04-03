@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:galon_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -10,6 +11,7 @@ class AuthController extends GetxController {
         email: emailAddress,
         password: password,
       );
+      Get.offAllNamed(Routes.HOME);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -17,7 +19,11 @@ class AuthController extends GetxController {
         print('Wrong password provided for that user.');
       }
     }
+
   }
 
-  void logout() async {}
+  void logout() async {
+    await auth.signOut();
+    Get.offAllNamed(Routes.LOGIN);
+  }
 }
