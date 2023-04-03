@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "630585260921",
+    "project_id": "galon-70f5a",
+    "storage_bucket": "galon-70f5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630585260921:android:cf98f67ef9b6f2610d4da8",
+        "android_client_info": {
+          "package_name": "com.example.galon_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630585260921-tpdem1dke1o0p9gh4l86340c1eer0ln7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhSnpQSmgQKcT54-btnSrUeb4zcbGrtOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630585260921-tpdem1dke1o0p9gh4l86340c1eer0ln7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
