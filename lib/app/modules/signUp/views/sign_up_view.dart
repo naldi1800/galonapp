@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:galon_app/app/controller/AuthController.dart';
 import 'package:galon_app/app/init/UI.dart';
@@ -5,10 +6,10 @@ import 'package:galon_app/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/sign_up_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignUpView extends GetView<SignUpController> {
+  const SignUpView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     AuthController auth = Get.find<AuthController>();
@@ -22,12 +23,12 @@ class LoginView extends GetView<LoginController> {
               // mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 105),
+                const SizedBox(height: 45),
 
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "Welcome Back!",
+                    "Create new account",
                     style: TextStyle(color: UI.object, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
@@ -36,17 +37,17 @@ class LoginView extends GetView<LoginController> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "Please sign in to your account",
+                    "Please fill in the form to continue",
                     style: TextStyle(color: UI.foreground, fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 65,
                   child: TextFormField(
-                    controller: controller.cUser,
+                    controller: controller.cName,
                     style: TextStyle(color: UI.object, fontSize: 15),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -55,7 +56,31 @@ class LoginView extends GetView<LoginController> {
                       ),
                       filled: true,
                       fillColor: UI.foreground,
+                      hintText: "Full Nama",
                     ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                SizedBox(
+                  width: double.infinity,
+                  height: 65,
+                  child: TextFormField(
+                    controller: controller.cEmail,
+                    style: TextStyle(color: UI.object, fontSize: 15),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: UI.foreground),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      filled: true,
+                      fillColor: UI.foreground,
+                      hintText: "Email",
+                    ),
+                    validator: (v) {
+                      return EmailValidator.validate("$v")
+                          ? null
+                          : "Please enter a valid email";
+                    },
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -66,7 +91,7 @@ class LoginView extends GetView<LoginController> {
                     height: 65,
                     width: double.infinity,
                     child: TextFormField(
-                      controller: controller.cPass,
+                      controller: controller.cPassword,
                       style: TextStyle(color: UI.object, fontSize: 15),
                       obscureText: controller.showPass.value,
                       keyboardType: TextInputType.visiblePassword,
@@ -75,6 +100,39 @@ class LoginView extends GetView<LoginController> {
                           borderSide: BorderSide(color: UI.foreground),
                           borderRadius: BorderRadius.circular(20),
                         ),
+                        filled: true,
+                        fillColor: UI.foreground,
+                        hintText: "Password",
+                        suffixIcon: IconButton(
+                          icon: Icon(controller.showPass.value
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            controller.showPass.value =
+                                !controller.showPass.value;
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+
+                Obx(
+                  () => SizedBox(
+                    height: 65,
+                    width: double.infinity,
+                    child: TextFormField(
+                      controller: controller.cRePassword,
+                      style: TextStyle(color: UI.object, fontSize: 15),
+                      obscureText: controller.showPass.value,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: UI.foreground),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        hintText: "Re Enter Password",
                         filled: true,
                         fillColor: UI.foreground,
                         suffixIcon: IconButton(
@@ -90,29 +148,21 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                // const SizedBox(height: 5),
-                SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
-                    onPressed: () {},
-                    style: const ButtonStyle(alignment: Alignment.centerRight),
-                    child: Text(
-                      "Forgot Password",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: UI.foreground,
-                      ),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 25),
+
                 SizedBox(
                   height: 65,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () =>
-                        auth.login(controller.cUser.text, controller.cPass.text),
+                    onPressed: () {
+                      if (controller.cPassword.text !=
+                          controller.cRePassword.text) {
+                        return;
+                      }
+                      auth.signUpWithPass(
+                          controller.cEmail.text, controller.cPassword.text);
+                    },
+                    // auth.login(controller.cUser.text, controller.cPass.text),
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(UI.action),
                       shape: MaterialStatePropertyAll(
@@ -122,8 +172,9 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                      child: Text("Sign In"),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                      child: Text("Sign Up"),
                     ),
                   ),
                 ),
@@ -145,7 +196,7 @@ class LoginView extends GetView<LoginController> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 20),
                       child: Text(
-                        "Sign in with Google",
+                        "Sign up with google",
                         style: TextStyle(color: UI.foreground),
                       ),
                     ),
@@ -159,14 +210,14 @@ class LoginView extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an Account?",
+                        "have an Account?",
                         style: TextStyle(color: UI.object, fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
                       TextButton(
-                        onPressed: () => Get.offAndToNamed(Routes.SIGN_UP),
+                        onPressed: () => Get.offAndToNamed(Routes.LOGIN),
                         child: Text(
-                          "Sign Up",
+                          "Sign In",
                           style: TextStyle(color: UI.action, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),

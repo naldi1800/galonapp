@@ -6,4 +6,12 @@ class LoginController extends GetxController {
       TextEditingController(text: "maura.galon.23@gmail.com");
   TextEditingController cPass = TextEditingController(text: "201008");
   var showPass = true.obs;
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    cUser.dispose();
+    cPass.dispose();
+  }
 }
