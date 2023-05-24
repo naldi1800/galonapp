@@ -37,7 +37,7 @@ class LoginView extends GetView<LoginController> {
                   width: double.infinity,
                   child: Text(
                     "Please sign in to your account",
-                    style: TextStyle(color: UI.foreground, fontSize: 15),
+                    style: TextStyle(color: UI.other, fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -101,7 +101,7 @@ class LoginView extends GetView<LoginController> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 15,
-                        color: UI.foreground,
+                        color: UI.action,
                       ),
                     ),
                   ),
@@ -111,8 +111,8 @@ class LoginView extends GetView<LoginController> {
                   height: 65,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () =>
-                        auth.login(controller.cUser.text, controller.cPass.text),
+                    onPressed: () => auth.login(
+                        controller.cUser.text, controller.cPass.text),
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(UI.action),
                       shape: MaterialStatePropertyAll(
@@ -122,31 +122,37 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                       child: Text("Sign In"),
                     ),
                   ),
                 ),
                 const SizedBox(height: 15),
-                SizedBox(
-                  height: 65,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(UI.object),
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                Visibility(
+                  visible: false,
+                  child: SizedBox(
+                    height: 65,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        auth.signInWithGoogle();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(UI.object),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 20),
-                      child: Text(
-                        "Sign in with Google",
-                        style: TextStyle(color: UI.foreground),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25, vertical: 20),
+                        child: Text(
+                          "Sign in with Google",
+                          style: TextStyle(color: UI.foreground),
+                        ),
                       ),
                     ),
                   ),

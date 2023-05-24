@@ -179,25 +179,28 @@ class SignUpView extends GetView<SignUpController> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                SizedBox(
-                  height: 65,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(UI.object),
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                Visibility(
+                  visible: false,
+                  child: SizedBox(
+                    height: 65,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () => auth.signUpWithGoogle(),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(UI.object),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 20),
-                      child: Text(
-                        "Sign up with google",
-                        style: TextStyle(color: UI.foreground),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25, vertical: 20),
+                        child: Text(
+                          "Sign up with google",
+                          style: TextStyle(color: UI.foreground),
+                        ),
                       ),
                     ),
                   ),
