@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_add_item/bindings/admin_add_item_binding.dart';
+import '../modules/admin_add_item/views/admin_add_item_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
+import '../modules/admin_listItem/bindings/admin_list_item_binding.dart';
+import '../modules/admin_listItem/views/admin_list_item_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -48,6 +52,16 @@ class AppPages {
       name: _Paths.SIGN_UP,
       page: () => const SignUpView(),
       binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_LIST_ITEM,
+      page: () => const AdminListItemView(),
+      binding: AdminListItemBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_ITEM,
+      page: () => const AdminAddItemView(),
+      binding: AdminAddItemBinding(),
     ),
   ];
 }

@@ -23,8 +23,10 @@ class mainClass extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           return GetMaterialApp(
             title: "Application",
-            initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
+            initialRoute:
+                snapshot.data != null ? Routes.ADMIN_HOME : Routes.LOGIN,
             getPages: AppPages.routes,
+            debugShowCheckedModeBanner: false,
           );
         }
         return const Center(child: CircularProgressIndicator());

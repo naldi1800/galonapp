@@ -16,7 +16,8 @@ class AuthController extends GetxController {
         password: password,
       );
 
-      if (!credential.user!.emailVerified) {
+      // if (!credential.user!.emailVerified) {
+      if (false) {
         credential.user!.sendEmailVerification();
         await auth.signOut();
         UI.warning(
