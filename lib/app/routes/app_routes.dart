@@ -9,6 +9,9 @@ abstract class Routes {
   static const SIGN_UP = _Paths.SIGN_UP;
   static const ADMIN_LIST_ITEM = _Paths.ADMIN_LIST_ITEM;
   static const ADMIN_ADD_ITEM = _Paths.ADMIN_ADD_ITEM;
+  static const ADMIN_EDIT_ITEM = _Paths.ADMIN_EDIT_ITEM;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const USER_MAPS = _Paths.USER_MAPS;
 }
 
 abstract class _Paths {
@@ -19,4 +22,7 @@ abstract class _Paths {
   static const SIGN_UP = '/sign-up';
   static const ADMIN_LIST_ITEM = '/admin-list-item';
   static const ADMIN_ADD_ITEM = '/admin-add-item';
+  static const ADMIN_EDIT_ITEM = '/admin-edit-item';
+  static const USER_PROFILE = '/user-profile';
+  static const USER_MAPS = '/user-maps';
 }

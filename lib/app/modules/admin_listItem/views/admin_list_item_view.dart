@@ -65,6 +65,9 @@ class AdminListItemView extends GetView<AdminListItemController> {
                                 controller.delete(data[index].id, item['nama']);
                               },
                             ),
+                            onTap: () {
+                              controller.toEdit(data[index].id);
+                            },
                           );
                         },
                       );

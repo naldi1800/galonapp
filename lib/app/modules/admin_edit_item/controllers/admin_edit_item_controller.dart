@@ -1,31 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:galon_app/app/init/UI.dart';
+import 'package:galon_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-class AdminAddItemController extends GetxController {
+class AdminEditItemController extends GetxController {
   late TextEditingController nameC;
   late TextEditingController ukuranC;
   late TextEditingController hargaC;
   FirebaseFirestore fire = FirebaseFirestore.instance;
 
-  void add(
+  Future<DocumentSnapshot> getData(docID) {
+    CollectionReference item = fire.collection('Items');
+    return item.doc(docID).get();
+  }
+
+  void edit(
+    docID,
     String nama,
     String ukuran,
     String harga,
   ) async {
-    CollectionReference costumers = fire.collection("Items");
+    CollectionReference item = fire.collection("Items");
 
     // DateTime d = DateTime.parse("");
-    await costumers.add({
+    await item.doc(docID).update({
       "nama": nama,
       "ukuran": int.parse(ukuran),
       "harga": int.parse(harga),
     });
+    // await item.add({
+    //   "nama": nama,
+    //   "ukuran": ukuran,
+    //   "harga": harga,
+    // });
 
     Get.defaultDialog(
       title: "Success",
-      middleText: "Success for adding new item",
+      middleText: "Success for change new item",
       backgroundColor: UI.foreground,
       titleStyle: TextStyle(color: UI.object),
       middleTextStyle: TextStyle(color: UI.object),
@@ -34,7 +46,7 @@ class AdminAddItemController extends GetxController {
         ukuranC.clear();
         hargaC.clear();
         Get.back();
-        Get.back();
+        Get.offAndToNamed(Routes.ADMIN_LIST_ITEM);
       },
       textConfirm: "Ok",
     );

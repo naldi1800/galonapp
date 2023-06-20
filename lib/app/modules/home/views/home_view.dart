@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galon_app/app/controller/AuthController.dart';
+import 'package:galon_app/app/init/Menu.dart';
 import 'package:galon_app/app/init/UI.dart';
 
 import 'package:get/get.dart';
@@ -93,25 +94,7 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 75,
-                color: UI.foreground,
-                child: Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    menuItem(icon: Icons.home, text: "Home"),
-                    menuItem(icon: Icons.shopping_bag, text: "Cart"),
-                    menuItem(icon: Icons.shopping_cart, text: "Orders"),
-                    menuItem(icon: Icons.person, text: "Profile"),
-                    menuItem(icon: Icons.logout, text: "Logout"),
-                  ],
-                ),
-              ),
-            ),
+            Menu().user(),
           ],
         ),
       ),
@@ -199,33 +182,6 @@ class HomeView extends GetView<HomeController> {
       child: Text(
         name,
         style: TextStyle(fontSize: 35),
-      ),
-    );
-  }
-
-  Container menuItem({required IconData icon, required String text}) {
-    return Container(
-      child: GestureDetector(
-        onTap: () {
-          if (text == "Logout") {
-            controller.auth.logout();
-          }
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: UI.action,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                color: UI.action,
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
